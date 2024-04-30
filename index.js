@@ -18,7 +18,7 @@ app.use(
     session({
         secret: "9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H",
         resave: false,
-        store: store,
+        store: new session.MemoryStore(),
         saveUninitialized: false,
         cookie: {
             httpOnly: true,
