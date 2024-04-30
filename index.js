@@ -22,7 +22,7 @@ app.use(
         saveUninitialized: false,
         cookie: {
             httpOnly: true,
-            //secure: true,
+            secure: true,
             maxAge: 6 * 60 * 60 * 1000, //6 hours
             rolling: true, //whenever session is modified it resets expirytime
         },
