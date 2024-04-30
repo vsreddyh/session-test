@@ -6,9 +6,7 @@ const bodyParser = require('body-parser');
 const MongoDBStore = require('connect-mongodb-session')(session);
 app.use(
     cors({
-        // origin: ["https://schedio-coral.vercel.app/"],
-        // methods:["GET","POST"],
-        // credentials: true
+        
     })
 );
 var store = new MongoDBStore({
