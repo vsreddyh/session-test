@@ -25,7 +25,6 @@ app.use(
             secure: true,
             maxAge: 6 * 60 * 60 * 1000, //6 hours
             rolling: true, //whenever session is modified it resets expirytime
-            sameSite: 'none',
         },
     })
 );
@@ -40,7 +39,7 @@ app.get('/store', cors(), (req, res) => {
 });
 app.get('/get', cors(), (req, res) => {
     console.log(req.session.store);
-    res.json(req.session.store);
+    res.json({data:req.session.store});
 });
 
 app.listen(3000, () => console.log('running on port 3000'));
