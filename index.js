@@ -23,7 +23,7 @@ app.use(
         store: store,
         saveUninitialized: false,
         cookie: {
-            httpOnly: false,
+            httpOnly: true,
             secure: true,
             maxAge: 6 * 60 * 60 * 1000, //6 hours
             rolling: true, //whenever session is modified it resets expirytime
@@ -44,4 +44,4 @@ app.get('/get', cors(), (req, res) => {
     res.json(req.session.store);
 });
 
-app.listen(3000);
+app.listen(3000, () => console.log('running on port 3000'));
