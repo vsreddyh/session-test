@@ -18,7 +18,7 @@ app.use(
     session({
         secret: "9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H",
         resave: false,
-        store: new session.MemoryStore(),
+        store: store,
         saveUninitialized: false,
         cookie: {
             httpOnly: true,
@@ -28,16 +28,16 @@ app.use(
         },
     })
 );
-app.use(bodyParser.json()); //limit limits the data which can be uploaded to server.js from frontend
-app.get('/', cors(), (req, res) => {
+app.use(bodyParser.json());
+app.get('/', (req, res) => {
     res.json('hello world');
 });
-app.get('/store', cors(), (req, res) => {
+app.get('/store', (req, res) => {
     req.session.store = 'hi0';
     console.log(req.session.store,"hlo");
     res.json('stored');
 });
-app.get('/get', cors(), (req, res) => {
+app.get('/get', (req, res) => {
     console.log(req.session.store);
     res.json({data:req.session.store});
 });
