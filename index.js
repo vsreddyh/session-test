@@ -4,11 +4,10 @@ const cors = require('cors');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const MongoDBStore = require('connect-mongodb-session')(session);
-app.use(
-    cors({
-        
-    })
-);
+app.use(cors({
+    origin: 'https://session-test-lac.vercel.app/',
+    credentials: true
+}));
 var store = new MongoDBStore({
     uri: "mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/sessy?retryWrites=true&w=majority",
     collection: 'mySessions',
