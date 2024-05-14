@@ -34,8 +34,13 @@ app.get('/', (req, res) => {
 });
 app.get('/store', (req, res) => {
     req.session.store = 'hi0';
-    console.log(req.session.store,"hlo");
-    res.json('stored');
+    req.session.save(err => {
+        if(err) {
+            console.log(err);
+        }
+        console.log(req.session.store,"hlo");
+        res.json('stored');
+    });
 });
 app.get('/get', (req, res) => {
     console.log(req.session.store);
