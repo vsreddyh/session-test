@@ -46,5 +46,6 @@ app.get('/get', (req, res) => {
     console.log(req.session.store);
     res.json({data:req.session.store,id:req.sessionID,id1:req.session.id,cookie:req.session.cookie});
 });
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Running on port ${port}`));
 
-// app.listen(3000, () => console.log('running on port 3000'));
