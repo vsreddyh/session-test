@@ -19,7 +19,7 @@ app.use(
         secret: "9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H",
         resave: false,
         store: store,
-        saveUninitialized: false,
+        saveUninitialized: true,
         cookie: {
             httpOnly: true,
             secure: true,
