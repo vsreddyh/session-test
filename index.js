@@ -19,9 +19,10 @@ app.use(
         secret: "9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H",
         resave: false,
         store: store,
-        saveUninitialized: true,
+        saveUninitialized: false,
         cookie: {
             httpOnly: true,
+            sameSite: true,
             secure: true,
             maxAge: 6 * 60 * 60 * 1000, //6 hours
             rolling: true, //whenever session is modified it resets expirytime
@@ -39,7 +40,7 @@ app.get('/store', (req, res) => {
 });
 app.get('/get', (req, res) => {
     console.log(req.session.store);
-    res.json({data:req.session.store});
+    res.json({data:req.session.store,id:req.sessionID,id1:req.session.id,cookie:req.session.cookie,auth:req.session.authenticated});
 });
 
 app.listen(3000, () => console.log('running on port 3000'));
