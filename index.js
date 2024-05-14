@@ -17,7 +17,7 @@ var store = new MongoDBStore({
 app.use(
     session({
         secret: "9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H",
-        resave: false,
+        resave: true,
         store: store,
         saveUninitialized: false,
         cookie: {
@@ -40,7 +40,7 @@ app.get('/store', (req, res) => {
 });
 app.get('/get', (req, res) => {
     console.log(req.session.store);
-    res.json({data:req.session.store,id:req.sessionID,id1:req.session.id,cookie:req.session.cookie,auth:req.session.authenticated});
+    res.json({data:req.session.store,id:req.sessionID,id1:req.session.id,cookie:req.session.cookie,auth:req.isAuthenticated()});
 });
 
 app.listen(3000, () => console.log('running on port 3000'));
