@@ -41,7 +41,7 @@ app.get('/store', (req, res) => {
             console.log(err);
         }
         console.log(req.session.store, "hlo");
-        res.json('stored'+req.session.id);
+        res.json('stored');
     });
 });
 
