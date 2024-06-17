@@ -4,7 +4,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
+const cookieParser = require('cookie-parser');
 const store = new MongoDBStore({
     uri: 'mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/sessy?retryWrites=true&w=majority',
     collection: 'mySessions',
@@ -14,7 +14,7 @@ app.use(cors({
     origin: 'https://session-test-lac.vercel.app',
     credentials: true
 }));
-
+app.use(cookieParser("9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H"))
 app.use(session({
     secret: '9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H',
     resave: false,
