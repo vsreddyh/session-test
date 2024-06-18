@@ -6,9 +6,18 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 require('dotenv').config();
+console.log(process.env.MONGODB_URI+ process.env.SESSION_SECRET)
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI, // Use environment variable
     collection: 'mySessions',
+});
+
+store.on('connected', () => {
+    console.log('MongoDB Session Store is connected.');
+});
+
+store.on('error', (error) => {
+    console.error('Session store error:', error);
 });
 
 app.use(cors({
@@ -40,20 +49,26 @@ app.get('/store', (req, res) => {
     req.session.save(err => {
         if (err) {
             console.log(err);
+        } else {
+            console.log('Session saved:', req.session);
+            res.json('stored');
         }
-        console.log(req.session.store, "hlo");
-        res.json('stored');
     });
 });
 
 app.get('/get', (req, res) => {
-    console.log(req.session.store);
-    res.json({
-        data: req.session.store,
-        id: req.sessionID,
-        id1: req.session.id,
-        cookie: req.session.cookie
-    });
+    if (req.session) {
+        console.log('Session found:', req.session);
+        res.json({
+            data: req.session.store,
+            id: req.sessionID,
+            id1: req.session.id,
+            cookie: req.session.cookie
+        });
+    } else {
+        console.log('No session found');
+        res.json({ message: 'No session found' });
+    }
 });
 
 const port = process.env.PORT || 3000;
