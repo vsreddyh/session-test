@@ -24,7 +24,7 @@ app.use(cors({
     origin: process.env.NODE_ENV === 'production' ? 'https://session-test-lac.vercel.app' : 'http://localhost:3000',
     credentials: true
 }));
-
+app.set("trust proxy", 1);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -34,7 +34,8 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         httpOnly: true,
         sameSite: 'strict',
-        secure: process.env.NODE_ENV === 'production' // Set to true in production
+        secure: process.env.NODE_ENV === 'production',
+        proxy: true
     }
 }));
 
