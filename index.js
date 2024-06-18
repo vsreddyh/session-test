@@ -4,19 +4,20 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+
+require('dotenv').config();
 const store = new MongoDBStore({
-    uri: 'mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/sessy?retryWrites=true&w=majority',
+    uri: process.env.MONGODB_URI, // Use environment variable
     collection: 'mySessions',
 });
 
 app.use(cors({
-    origin: 'https://session-test-lac.vercel.app',
+    origin: process.env.NODE_ENV === 'production' ? 'https://session-test-lac.vercel.app' : 'http://localhost:3000',
     credentials: true
 }));
-app.use(cookieParser("9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H"))
+
 app.use(session({
-    secret: "9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
@@ -24,7 +25,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         httpOnly: true,
         sameSite: 'strict',
-        secure: false // must be true to send cookies over https
+        secure: process.env.NODE_ENV === 'production' // Set to true in production
     }
 }));
 
@@ -57,4 +58,3 @@ app.get('/get', (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Running on port ${port}`));
-
