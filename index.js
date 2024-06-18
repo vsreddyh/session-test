@@ -16,7 +16,7 @@ app.use(cors({
 }));
 app.use(cookieParser("9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H"))
 app.use(session({
-    secret: '9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H',
+    secret: "9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H",
     resave: false,
     saveUninitialized: false,
     store: store,
@@ -24,7 +24,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         httpOnly: true,
         sameSite: 'strict',
-        secure: true // must be true to send cookies over https
+        secure: false // must be true to send cookies over https
     }
 }));
 
