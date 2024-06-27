@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
     res.json('hello world');
 });
 
-app.get('/store', (req, res) => {
+app.post('/store', (req, res) => {
     req.session.store = 'hi0';
     req.session.save(err => {
         if (err) {
