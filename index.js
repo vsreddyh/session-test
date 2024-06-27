@@ -11,8 +11,7 @@ console.log(process.env.MONGODB_URI+ process.env.SESSION_SECRET)
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI, // Use environment variable
     collection: 'mySessions',
-});
-app.use(static(__dirname + '/public')); // Serve static files from 'public' folder
+}); // Serve static files from 'public' folder
 store.on('connected', () => {
     console.log('MongoDB Session Store is connected.');
 });
@@ -43,7 +42,7 @@ app.use(session({
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname+'/public/index.html');
 });
 
 app.post('/store', (req, res) => {
