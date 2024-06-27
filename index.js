@@ -63,7 +63,6 @@ app.get('/get', (req, res) => {
         res.json({
             data: req.session.store,
             id: req.sessionID,
-            id1: req.session.id,
             cookie: req.session.cookie
         });
     } else {
