@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Requests</title>
+</head>
+<body>
+    <h1>Send Requests</h1>
+    <p>Click a button to send a request and see the response.</p>
+    <div>
+        <button id="storeButton">Send POST Request</button>
+        <button id="getButton">Send GET Request</button>
+    </div>
+    <pre id="response"></pre>
+
+    <script>
+        const storeButton = document.getElementById('storeButton');
+        const getButton = document.getElementById('getButton');
+        const responsePre = document.getElementById('response');
+
+        storeButton.addEventListener('click', () => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/store');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    responsePre.textContent = xhr.responseText;
+                } else {
+                    responsePre.textContent = `Error: ${xhr.statusText}`;
+                }
+            };
+            xhr.send();
+        });
+
+        getButton.addEventListener('click', () => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/get');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    responsePre.textContent = xhr.responseText;
+                } else {
+                    responsePre.textContent = `Error: ${xhr.statusText}`;
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
